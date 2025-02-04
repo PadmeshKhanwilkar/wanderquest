@@ -1,0 +1,15 @@
+{
+  "name": "login-server",
+  "version": "1.0.0",
+  "description": "Backend for WanderQuest login system",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mongoose": "^8.9.5"
+  }
+}
