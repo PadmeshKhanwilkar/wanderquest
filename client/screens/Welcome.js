@@ -20,7 +20,8 @@ import {
   Avatar,
 } from './../components/styles.js';
 
-const Welcome = ({ navigation }) => {
+const Welcome = ({ navigation, route }) => {
+  const { name, email } = route.params;
   return (
     <>
       <StatusBar style="light" />
@@ -30,10 +31,12 @@ const Welcome = ({ navigation }) => {
           source={require('./../assets/img/Gym Barbell Close-Up.jpeg')}
         />
         <WelcomeContainer>
-          <PageTitle welcome={true}>Welcome! Timi</PageTitle>
+          <PageTitle welcome={true}>Welcome!</PageTitle>
 
-          <SubTitle welcome={true}>Dishita Parihar</SubTitle>
-          <SubTitle welcome={true}>dishitaparihar2008@gmail.com</SubTitle>
+          <SubTitle welcome={true}>{name || 'Dishita Parihar'}</SubTitle>
+          <SubTitle welcome={true}>
+            {email || 'dishitaparihar2008@gmail.com'}
+          </SubTitle>
           <StyledFormArea>
             <Avatar
               resizeMode="cover"
