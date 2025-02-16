@@ -2,7 +2,6 @@
   "name": "wanderquest",
   "version": "1.0.0",
   "homepage": "https://github.com/PadmeshKhanwilkar/wanderquest",
-  "main": "main.js",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",

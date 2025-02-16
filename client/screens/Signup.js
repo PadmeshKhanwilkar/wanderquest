@@ -27,7 +27,7 @@ import {
   ExtraText,
   TextLink,
   TextLinkContent,
-} from './../components/styles.js';
+} from '../components/styles.js';
 import { View, TouchableOpacity } from 'react-native';
 
 // colors
@@ -144,7 +144,7 @@ const Signup = ({ navigation }) => {
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange('confirmPassword')}
                   onBlur={handleBlur('confirmPassword')}
-                  value={values.password}
+                  value={values.confirmPassword}
                   secureTextEntry={hidePassword}
                   isPassword={true}
                   hidePassword={hidePassword}
