@@ -47,13 +47,15 @@ const Login = ({ navigation }) => {
 
   const handleLogin = (credentials, setSubmitting) => {
     handleMessage(null);
-    const url = 'http://192.168.1.3:3000/user/login';
+    // const url = 'http://192.168.209.195:3000/user/login'; // idea moobile ip
+    const url = 'http://192.168.1.6:3000/user/login'; // wifi ip
 
     axios
       .post(url, credentials)
       .then((response) => {
         const result = response.data;
         const { message, status, data } = result;
+        console.log(status);
 
         if (status !== 'SUCCESS') {
           handleMessage(message, status);
@@ -73,6 +75,8 @@ const Login = ({ navigation }) => {
     setMessage(message);
     setMessageType(type);
   };
+
+  const handleGoogleSignIn = () => {};
 
   return (
     <KeyboardAvoidingWrapper>

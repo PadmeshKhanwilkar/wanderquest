@@ -67,7 +67,8 @@ const Signup = ({ navigation }) => {
   // form handling
   const handleSignup = (credentials, setSubmitting) => {
     handleMessage(null);
-    const url = 'http://192.168.1.3:3000/user/signup';
+    // const url = 'http://192.168.1.3:3000/user/signup'; // wifi
+    const url = 'http://192.168.209.195:3000/user/signup'; // wifi
 
     axios
       .post(url, credentials)
