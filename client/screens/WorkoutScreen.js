@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Modal, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, StyledButton, ButtonText } from '../components/styles';
+import PedometerTracker from '../components/PedometerTracker';
 
 const WorkoutScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -16,7 +17,10 @@ const WorkoutScreen = () => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.primary }}>
-      
+      <Text style={{ fontSize: 24, fontWeight: 'bold', color: Colors.brand, marginBottom: 20 }}>
+        Workout Tracker
+      </Text>
+      <PedometerTracker />
       {/* Workout Buttons */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', width: '90%' }}>
         
