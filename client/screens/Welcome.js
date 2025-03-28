@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import '../global.css';
 
 // force install if dependency conflicts between react and react-dom
 import { Formik } from 'formik';
@@ -19,6 +20,8 @@ import {
   WelcomeImage,
   Avatar,
 } from './../components/styles.js';
+
+import { Pressable, Text } from 'react-native';
 
 const Welcome = ({ navigation, route }) => {
   const { name, email } = route.params;
@@ -43,6 +46,18 @@ const Welcome = ({ navigation, route }) => {
               source={require('./../assets/img/—Pngtree—cartoon color simple male avatar_5230557.png')}
             />
             <Line />
+
+            <Pressable
+              className="p-5 rounded-xl bg-green-500"
+              onPress={() => {
+                navigation.navigate('RenderMap');
+              }}
+            >
+              <Text className="text-white text-center text-lg font-semibold">
+                Get Started
+              </Text>
+            </Pressable>
+
             <StyledButton
               onPress={() => {
                 navigation.navigate('Login');

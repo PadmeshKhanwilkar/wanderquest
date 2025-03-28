@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import '../global.css';
 
 // force install if dependency conflicts between react and react-dom
 import { Formik } from 'formik';
@@ -39,6 +40,7 @@ import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper.js';
 
 // API client
 import axios from 'axios';
+import { Text } from 'react-native';
 
 const Login = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -49,12 +51,15 @@ const Login = ({ navigation }) => {
     handleMessage(null);
     // const url = 'http://192.168.1.3:3000/user/login';
     const url = 'http://192.168.1.26:3000/user/login';
+    // const url = 'http://192.168.209.195:3000/user/login'; // idea moobile ip
+    // const url = 'http://192.168.1.6:3000/user/login'; // 
 
     axios
       .post(url, credentials)
       .then((response) => {
         const result = response.data;
         const { message, status, data } = result;
+        console.log(status);
 
         if (status !== 'SUCCESS') {
           handleMessage(message, status);
@@ -74,6 +79,8 @@ const Login = ({ navigation }) => {
     setMessage(message);
     setMessageType(type);
   };
+
+  const handleGoogleSignIn = () => {};
 
   return (
     <KeyboardAvoidingWrapper>
