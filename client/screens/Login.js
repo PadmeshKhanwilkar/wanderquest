@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import '../global.css';
 
 // force install if dependency conflicts between react and react-dom
 import { Formik } from 'formik';
@@ -39,6 +40,7 @@ import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper.js';
 
 // API client
 import axios from 'axios';
+import { Text } from 'react-native';
 
 const Login = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
