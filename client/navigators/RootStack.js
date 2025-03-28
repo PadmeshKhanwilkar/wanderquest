@@ -11,7 +11,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import Login from './../screens/Login';
 import Signup from './../screens/Signup';
 import Welcome from './../screens/Welcome';
-import RenderMap from './../screens/RenderMap';
+import BottomTabs from './BottomTabs';
+// import RenderMap from './../screens/RenderMap';
 
 const Stack = createStackNavigator();
 
@@ -32,12 +33,14 @@ const RootStack = () => {
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="RenderMap" component={RenderMap} />
+        {/* <Stack.Screen name="RenderMap" component={RenderMap} /> */}
+        
         <Stack.Screen
           options={{ headerTintColor: primary }}
           name="Welcome"
           component={Welcome}
         />
+        <Stack.Screen name="BottomTabs" component={BottomTabs} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -50,7 +50,8 @@ const Welcome = ({ navigation, route }) => {
             <Pressable
               className="p-5 rounded-xl bg-green-500"
               onPress={() => {
-                navigation.navigate('RenderMap');
+                // navigation.navigate('RenderMap');
+                navigation.navigate('BottomTabs');
               }}
             >
               <Text className="text-white text-center text-lg font-semibold">
