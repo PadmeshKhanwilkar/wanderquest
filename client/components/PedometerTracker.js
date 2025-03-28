@@ -4,17 +4,14 @@ import * as Location from 'expo-location';
 import { Pedometer } from 'expo-sensors';
 import { Colors } from '../components/styles';
 
-const PedometerTracker = () => {
+const PedometerTracker = ({ setDistance, distance }) => {
   const [isPedometerAvailable, setIsPedometerAvailable] = useState(false);
   const [steps, setSteps] = useState(0);
-  const [distance, setDistance] = useState(0);
-  const [subscription, setSubscription] = useState(null);
 
   useEffect(() => {
     let pedometerSubscription;
 
     const startTracking = async () => {
-      // 🚀 Request Motion & Fitness Permission
       const pedometerAvailable = await Pedometer.isAvailableAsync();
       setIsPedometerAvailable(pedometerAvailable);
 
@@ -22,12 +19,10 @@ const PedometerTracker = () => {
         pedometerSubscription = Pedometer.watchStepCount((result) => {
           console.log('Steps Counted:', result.steps);
           setSteps(result.steps);
-          setDistance((result.steps * 0.762).toFixed(2)); // 1 step ≈ 0.762 meters
+          setDistance((result.steps * 0.762).toFixed(2)); // Update distance
         });
-        setSubscription(pedometerSubscription);
       }
 
-      // 🚀 Request Location Permission
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         console.log('Location permission denied');
@@ -42,7 +37,7 @@ const PedometerTracker = () => {
         pedometerSubscription.remove();
       }
     };
-  }, []);
+  }, [setDistance]); // ✅ Dependency Fix
 
   return (
     <View style={styles.container}>
@@ -51,7 +46,7 @@ const PedometerTracker = () => {
         Pedometer Available: {isPedometerAvailable ? 'Yes' : 'No'}
       </Text>
       <Text style={styles.info}>Steps Taken: {steps}</Text>
-      <Text style={styles.info}>Distance Covered: {distance} meters</Text>
+      <Text style={styles.info}>Distance Covered: {distance || 0} meters</Text>
     </View>
   );
 };

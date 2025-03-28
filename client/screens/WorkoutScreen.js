@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Modal, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, StyledButton, ButtonText } from '../components/styles';
+import PedometerTracker from '../components/PedometerTracker';
 
 const WorkoutScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -48,6 +49,11 @@ const WorkoutScreen = () => {
         />
       </View>
 
+      {/* ✅ Auto Step Tracking for Walking & Running */}
+      {(selectedWorkout === 'Walking' || selectedWorkout === 'Running') && (
+        <PedometerTracker setDistance={setDistance} />
+      )}
+
       {/* Modal for Distance Input */}
       <Modal visible={modalVisible} transparent={true} animationType="slide">
         <View style={modalStyles.modalContainer}>
@@ -61,7 +67,7 @@ const WorkoutScreen = () => {
               placeholder="Enter distance in km"
               keyboardType="numeric"
               value={distance}
-              onChangeText={setDistance}
+              onChangeText={(text) => setDistance(text)}
             />
 
             <View
