@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import '../global.css';
 
@@ -42,17 +42,20 @@ import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper.js';
 import axios from 'axios';
 import { Text } from 'react-native';
 
+import { UserContext } from '../UserContext.js';
+
 const Login = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
+  const { setUser } = useContext(UserContext);
 
   const handleLogin = (credentials, setSubmitting) => {
     handleMessage(null);
     // const url = 'http://192.168.1.3:3000/user/login';
-    const url = 'http://192.168.1.26:3000/user/login';
+    // const url = 'http://192.168.1.26:3000/user/login';
     // const url = 'http://192.168.209.195:3000/user/login'; // idea moobile ip
-    // const url = 'http://192.168.1.6:3000/user/login'; //
+    const url = 'http://192.168.1.6:3000/user/login'; //
 
     axios
       .post(url, credentials)
@@ -64,6 +67,7 @@ const Login = ({ navigation }) => {
         if (status !== 'SUCCESS') {
           handleMessage(message, status);
         } else {
+          setUser(data[0]);
           navigation.navigate('Welcome', { ...data[0] });
         }
         setSubmitting(false);

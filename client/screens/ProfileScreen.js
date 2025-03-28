@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 import {
   InnerContainer,
@@ -14,20 +13,21 @@ import {
   WelcomeImage,
   Avatar,
 } from './../components/styles.js';
+import { UserContext } from '../UserContext.js';
 
-const ProfileScreen = () => {
-  const navigation = useNavigation();
+const ProfileScreen = ({ navigation, route }) => {
+  const { user } = useContext(UserContext);
 
   return (
     <View style={styles.container}>
-      {/* User Avatar */}
-      <WelcomeImage
-        source={{ uri: 'https://via.placeholder.com/100' }} // Replace with actual profile picture
-        // style={styles.avatar}
+      <Avatar
+        resizeMode="cover"
+        source={require('./../assets/img/—Pngtree—cartoon color simple male avatar_5230557.png')}
       />
 
       {/* Username & Level */}
-      <Text style={styles.username}>Wanderer_123</Text>
+      <Text style={styles.username}>{user.name}</Text>
+      <Text className="text-white mb-1">{user.email}</Text>
       <Text style={styles.level}>Level 5 | 2,340 XP</Text>
 
       {/* Stats */}
@@ -45,17 +45,34 @@ const ProfileScreen = () => {
       {/* Achievements Section */}
       <Text style={styles.sectionTitle}>🏆 Achievements</Text>
       <View style={styles.achievementContainer}>
-        <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.badge} />
-        <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.badge} />
-        <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.badge} />
+        <Image
+          source={{ uri: 'https://via.placeholder.com/50' }}
+          style={styles.badge}
+        />
+        <Image
+          source={{ uri: 'https://via.placeholder.com/50' }}
+          style={styles.badge}
+        />
+        <Image
+          source={{ uri: 'https://via.placeholder.com/50' }}
+          style={styles.badge}
+        />
       </View>
 
       {/* Profile Actions */}
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('EditProfile')}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('EditProfile')}
+      >
         <Text style={styles.buttonText}>Edit Profile</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.button, styles.logoutButton]}>
+      <TouchableOpacity
+        style={[styles.button, styles.logoutButton]}
+        onPress={() => {
+          navigation.navigate('Login');
+        }}
+      >
         <Text style={styles.buttonText}>Logout</Text>
       </TouchableOpacity>
     </View>
@@ -67,7 +84,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#121212', // Dark theme
-    paddingTop: 50,
+    paddingTop: 60,
   },
   avatar: {
     width: 100,
