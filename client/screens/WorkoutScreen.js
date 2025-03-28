@@ -24,6 +24,11 @@ const WorkoutScreen = () => {
         backgroundColor: Colors.primary,
       }}
     >
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.primary }}>
+      <Text style={{ fontSize: 24, fontWeight: 'bold', color: Colors.brand, marginBottom: 20 }}>
+        Workout Tracker
+      </Text>
+      <PedometerTracker />
       {/* Workout Buttons */}
       <View
         style={{
