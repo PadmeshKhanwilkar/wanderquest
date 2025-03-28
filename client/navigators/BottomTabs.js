@@ -11,7 +11,7 @@ import { Ionicons } from "react-native-vector-icons"; // For icons
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
-
+import WorkoutScreen from "../screens/WorkoutScreen";
 const Tab = createBottomTabNavigator();
 
 const BottomTabs = () => {
@@ -24,7 +24,7 @@ const BottomTabs = () => {
             if (route.name === "Map") iconName = "map-outline";
             else if (route.name === "Profile") iconName = "person-outline";
             else if (route.name === "Settings") iconName = "settings-outline";
-
+            else if (route.name === "Workout") iconName = "fitness-outline";
             return <Ionicons name={iconName} size={size} color={color} />;
           },
           tabBarActiveTintColor: "#007AFF",
@@ -35,6 +35,7 @@ const BottomTabs = () => {
         <Tab.Screen name="Map" component={RenderMap} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen name="Workout" component={WorkoutScreen}/>
       </Tab.Navigator>
   );
 };

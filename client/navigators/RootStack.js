@@ -12,6 +12,7 @@ import Login from './../screens/Login';
 import Signup from './../screens/Signup';
 import Welcome from './../screens/Welcome';
 import BottomTabs from './BottomTabs';
+import WorkoutScreen from './../screens/WorkoutScreen';
 // import RenderMap from './../screens/RenderMap';
 
 const Stack = createStackNavigator();
@@ -41,6 +42,7 @@ const RootStack = () => {
           component={Welcome}
         />
         <Stack.Screen name="BottomTabs" component={BottomTabs} />
+        <Stack.Screen name="Workout" component={WorkoutScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
