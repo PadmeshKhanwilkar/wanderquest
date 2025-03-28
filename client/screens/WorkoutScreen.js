@@ -16,26 +16,52 @@ const WorkoutScreen = () => {
   };
 
   return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.primary,
+      }}
+    >
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.primary }}>
       <Text style={{ fontSize: 24, fontWeight: 'bold', color: Colors.brand, marginBottom: 20 }}>
         Workout Tracker
       </Text>
       <PedometerTracker />
       {/* Workout Buttons */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-around', width: '90%' }}>
-        
-        <WorkoutButton icon="bicycle" label="Cycling" onPress={() => openModal('Cycling')} />
-        <WorkoutButton icon="walk" label="Walking" onPress={() => openModal('Walking')} />
-        <WorkoutButton icon="footsteps" label="Running" onPress={() => openModal('Running')} />
-        
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          width: '90%',
+        }}
+      >
+        <WorkoutButton
+          icon="bicycle"
+          label="Cycling"
+          onPress={() => openModal('Cycling')}
+        />
+        <WorkoutButton
+          icon="walk"
+          label="Walking"
+          onPress={() => openModal('Walking')}
+        />
+        <WorkoutButton
+          icon="footsteps"
+          label="Running"
+          onPress={() => openModal('Running')}
+        />
       </View>
 
       {/* Modal for Distance Input */}
       <Modal visible={modalVisible} transparent={true} animationType="slide">
         <View style={modalStyles.modalContainer}>
           <View style={modalStyles.modalContent}>
-            <Text style={modalStyles.modalTitle}>Enter Distance for {selectedWorkout}</Text>
-            
+            <Text style={modalStyles.modalTitle}>
+              Enter Distance for {selectedWorkout}
+            </Text>
+
             <TextInput
               style={modalStyles.input}
               placeholder="Enter distance in km"
@@ -44,21 +70,25 @@ const WorkoutScreen = () => {
               onChangeText={setDistance}
             />
 
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-around' }}
+              className="gap-3"
+            >
               <StyledButton onPress={() => setModalVisible(false)}>
                 <ButtonText>Cancel</ButtonText>
               </StyledButton>
-              <StyledButton onPress={() => {
-                console.log(`${selectedWorkout} for ${distance} km`);
-                setModalVisible(false);
-              }}>
+              <StyledButton
+                onPress={() => {
+                  console.log(`${selectedWorkout} for ${distance} km`);
+                  setModalVisible(false);
+                }}
+              >
                 <ButtonText>Start</ButtonText>
               </StyledButton>
             </View>
           </View>
         </View>
       </Modal>
-
     </View>
   );
 };

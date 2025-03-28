@@ -115,7 +115,12 @@ export default function RenderMap() {
         <View className="flex-row w-full gap-1 py-1 px-3">
           <Pressable
             className="flex-1 items-center bg-blue-500 p-4 rounded-lg"
-            onPress={() => setIsChoosingSource(!isChoosingSource)}
+            onPress={() => {
+              if (isChoosingSource) {
+                setSource(null); // Remove source when canceling
+              }
+              setIsChoosingSource(!isChoosingSource);
+            }}
           >
             <Text className="text-white text-lg">
               {isChoosingSource ? 'Cancel' : 'Choose Source'}
@@ -123,7 +128,12 @@ export default function RenderMap() {
           </Pressable>
           <Pressable
             className="flex-1 items-center bg-blue-500 p-4 rounded-lg"
-            onPress={() => setIsChoosingDestination(!isChoosingDestination)}
+            onPress={() => {
+              if (isChoosingDestination) {
+                setDestination(null); // Remove destination when canceling
+              }
+              setIsChoosingDestination(!isChoosingDestination);
+            }}
           >
             <Text className="text-white text-lg">
               {isChoosingDestination ? 'Cancel' : 'Choose Destination'}
