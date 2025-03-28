@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, Switch, Image, TextInput, TouchableOpacity } from 'react-native';
 import Constants from 'expo-constants';
 
 const StatusBarHeight = Constants.statusBarHeight;
@@ -191,3 +191,43 @@ export const TextLinkContent = styled.Text`
   color: ${brand};
   font-size: 15px;
 `;
+
+// Reusable section wrapper
+export const SectionWrapper = styled.View`
+  width: 100%;
+  padding: 15px;
+  background-color: ${primary};
+  margin-bottom: 10px;
+  border-radius: 8px;
+  elevation: 2; /* Shadow effect */
+`;
+
+// Reusable row for settings options
+export const SettingOption = styled(TouchableOpacity)`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom-width: 1px;
+  border-bottom-color: ${secondary};
+`;
+
+// Switch for toggling settings
+export const ToggleSwitch = styled(Switch)`
+  transform: scale(1.1);
+`;
+
+// Section title
+export const SectionTitle = styled.Text`
+  font-size: 18px;
+  font-weight: bold;
+  color: ${tertiary};
+  padding: 10px;
+`;
+
+// Divider line
+export const SectionDivider = styled.View`
+  height: 1px;
+  background-color: ${darkLight};
+  margin: 10px 0;
+  `;
