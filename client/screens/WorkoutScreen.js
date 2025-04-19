@@ -19,16 +19,22 @@ const WorkoutScreen = () => {
     <View
       style={{
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+        paddingTop: '25%',
         alignItems: 'center',
         backgroundColor: Colors.primary,
       }}
     >
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.primary }}>
-      <Text style={{ fontSize: 24, fontWeight: 'bold', color: Colors.brand, marginBottom: 20 }}>
+      <Text
+        style={{
+          fontSize: 24,
+          fontWeight: 'bold',
+          color: Colors.brand,
+          marginBottom: 20,
+        }}
+      >
         Workout Tracker
       </Text>
-      <PedometerTracker />
       {/* Workout Buttons */}
       <View
         style={{
@@ -38,14 +44,14 @@ const WorkoutScreen = () => {
         }}
       >
         <WorkoutButton
-          icon="bicycle"
-          label="Cycling"
-          onPress={() => openModal('Cycling')}
-        />
-        <WorkoutButton
           icon="walk"
           label="Walking"
           onPress={() => openModal('Walking')}
+        />
+        <WorkoutButton
+          icon="bicycle"
+          label="Cycling"
+          onPress={() => openModal('Cycling')}
         />
         <WorkoutButton
           icon="footsteps"
@@ -56,7 +62,11 @@ const WorkoutScreen = () => {
 
       {/* ✅ Auto Step Tracking for Walking & Running */}
       {(selectedWorkout === 'Walking' || selectedWorkout === 'Running') && (
-        <PedometerTracker setDistance={setDistance} />
+        <PedometerTracker
+          distance={distance}
+          setDistance={setDistance}
+          selectedWorkout={selectedWorkout}
+        />
       )}
 
       {/* Modal for Distance Input */}

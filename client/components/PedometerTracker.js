@@ -1,74 +1,100 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import * as Location from 'expo-location';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 import { Pedometer } from 'expo-sensors';
 import { Colors } from '../components/styles';
 
-const PedometerTracker = ({ setDistance, distance }) => {
-  const [isPedometerAvailable, setIsPedometerAvailable] = useState(false);
-  const [steps, setSteps] = useState(0);
+const PedometerTracker = ({ distance, setDistance, selectedWorkout }) => {
+  const [isPedometerAvailable, setIsPedometerAvailable] = useState('checking');
+  const [pastStepCount, setPastStepCount] = useState(0);
+  const [currentStepCount, setCurrentStepCount] = useState(0);
 
   useEffect(() => {
-    let pedometerSubscription;
+    let subscription;
 
-    const startTracking = async () => {
-      const pedometerAvailable = await Pedometer.isAvailableAsync();
-      setIsPedometerAvailable(pedometerAvailable);
+    const requestPermissionAndSubscribe = async () => {
+      if (Platform.OS === 'ios') {
+        const { status } = await Pedometer.requestPermissionsAsync();
+        if (status !== 'granted') {
+          setIsPedometerAvailable('Permission denied');
+          return;
+        }
+      } else if (Platform.OS === 'android') {
+        const { status } = await Pedometer.requestPermissionsAsync();
+        if (status !== 'granted') {
+          setIsPedometerAvailable('Permission denied');
+          return;
+        }
+      }
 
-      if (pedometerAvailable) {
-        pedometerSubscription = Pedometer.watchStepCount((result) => {
-          console.log('Steps Counted:', result.steps);
-          setSteps(result.steps);
-          setDistance((result.steps * 0.762).toFixed(2)); // Update distance
+      const isAvailable = await Pedometer.isAvailableAsync();
+      setIsPedometerAvailable(String(isAvailable));
+
+      if (isAvailable) {
+        if (Platform.OS === 'ios') {
+          const end = new Date();
+          const start = new Date();
+          start.setDate(end.getDate() - 1);
+
+          try {
+            const result = await Pedometer.getStepCountAsync(start, end);
+            setPastStepCount(result.steps);
+          } catch (err) {
+            console.error('Error fetching past step count:', err);
+            setPastStepCount(0);
+          }
+        }
+
+        // Watch step count for both platforms
+        subscription = Pedometer.watchStepCount((result) => {
+          setCurrentStepCount(result.steps);
         });
       }
-
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        console.log('Location permission denied');
-        return;
-      }
     };
 
-    startTracking();
+    requestPermissionAndSubscribe();
 
     return () => {
-      if (pedometerSubscription) {
-        pedometerSubscription.remove();
-      }
+      if (subscription) subscription.remove();
     };
-  }, [setDistance]); // ✅ Dependency Fix
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Step Tracker</Text>
-      <Text style={styles.info}>
-        Pedometer Available: {isPedometerAvailable ? 'Yes' : 'No'}
+      <Text style={styles.heading}>Live Step Tracking</Text>
+      <Text style={styles.label}>
+        Pedometer available: {isPedometerAvailable}
       </Text>
-      <Text style={styles.info}>Steps Taken: {steps}</Text>
-      <Text style={styles.info}>Distance Covered: {distance || 0} meters</Text>
+      {Platform.OS === 'ios' && (
+        <Text style={styles.label}>Past 24 hrs: {pastStepCount} steps</Text>
+      )}
+      <Text style={styles.label}>
+        Current session: {currentStepCount} steps
+      </Text>
+      <Text style={styles.label}>
+        {selectedWorkout} goal: {distance} km
+      </Text>
     </View>
   );
 };
 
-// 📌 **Styles**
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    backgroundColor: Colors.primary,
+    marginTop: 30,
     alignItems: 'center',
+    backgroundColor: Colors.tertiary,
+    padding: 20,
     borderRadius: 10,
-    marginVertical: 10,
+    width: '90%',
   },
-  title: {
-    fontSize: 20,
+  heading: {
+    fontSize: 18,
     fontWeight: 'bold',
     color: Colors.brand,
     marginBottom: 10,
   },
-  info: {
+  label: {
     fontSize: 16,
-    color: Colors.tertiary,
+    color: Colors.darkLight,
     marginBottom: 5,
   },
 });
