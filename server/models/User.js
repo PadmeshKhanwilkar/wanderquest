@@ -6,6 +6,7 @@ const UserSchema = new Schema({
   email: String,
   password: String,
   dateOfBirth: Date,
+  score: { type: Number, default: 0 },
 });
 
 const User = mongoose.model('User', UserSchema);

@@ -157,4 +157,35 @@ router.post('/login', (req, res) => {
   }
 });
 
+// leaderboard route
+// Get leaderboard - users sorted by score
+router.get('/leaderboard', async (req, res) => {
+  try {
+    // Fetch users from the database and sort by the score in descending order
+    const users = await User.find({})
+      .sort({ score: -1 }) // Ensure the sorting uses the proper score field
+      .select('name score'); // Select only the fields you need
+
+    // Ensure that all users have a score, defaulting to 0 if it's missing
+    const updatedUsers = users.map((user) => ({
+      ...user.toObject(),
+      score: user.score ?? 0, // Assign 0 if the score is missing
+    }));
+
+    console.log('Updated Users', updatedUsers); // You can see the updated users list in the console
+
+    res.json({
+      status: 'SUCCESS',
+      message: 'Leaderboard fetched successfully',
+      data: updatedUsers,
+    });
+  } catch (err) {
+    console.log('Leaderboard fetch error:', err);
+    res.status(500).json({
+      status: 'FAILED',
+      message: 'Error fetching leaderboard',
+    });
+  }
+});
+
 module.exports = router;
