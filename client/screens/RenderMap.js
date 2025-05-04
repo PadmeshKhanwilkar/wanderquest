@@ -1,8 +1,15 @@
-import { View, Text, ActivityIndicator, Pressable } from 'react-native';
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  Pressable,
+  PermissionsAndroid,
+  Platform,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import { StyleSheet } from 'react-native';
-import * as Location from 'expo-location';
+import Geolocation from 'react-native-geolocation-service';
 import { getDistance } from 'geolib';
 
 export default function RenderMap() {
@@ -14,35 +21,64 @@ export default function RenderMap() {
   const [distance, setDistance] = useState(null);
 
   useEffect(() => {
+    async function requestLocationPermission() {
+      if (Platform.OS === 'android') {
+        try {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            {
+              title: 'Location Permission',
+              message: 'This app needs access to your location.',
+              buttonNeutral: 'Ask Me Later',
+              buttonNegative: 'Cancel',
+              buttonPositive: 'OK',
+            }
+          );
+          return granted === PermissionsAndroid.RESULTS.GRANTED;
+        } catch (err) {
+          console.warn(err);
+          return false;
+        }
+      } else {
+        // Assume iOS permissions are handled via Info.plist
+        return true;
+      }
+    }
+
     async function getCurrentLocation() {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        console.log('Permission denied');
+      const hasPermission = await requestLocationPermission();
+      if (!hasPermission) {
+        console.log({ code: 1, message: 'Location permission not granted.' });
         return;
       }
 
-      let userLocation = await Location.getCurrentPositionAsync({});
-      setLocation({
-        latitude: userLocation.coords.latitude,
-        longitude: userLocation.coords.longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
-      });
+      Geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+          });
+        },
+        (error) => {
+          console.log(error);
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+      );
     }
 
     getCurrentLocation();
   }, []);
 
-  // Separate useEffect for distance calculation
   useEffect(() => {
     if (source && destination) {
       const dist =
         getDistance(
           { latitude: source.latitude, longitude: source.longitude },
           { latitude: destination.latitude, longitude: destination.longitude }
-        ) / 1000; // Convert meters to kilometers
-
-      setDistance(dist.toFixed(2)); // Round to 2 decimal places
+        ) / 1000;
+      setDistance(dist.toFixed(2));
     } else {
       setDistance(null);
     }
@@ -61,10 +97,8 @@ export default function RenderMap() {
 
   return (
     <>
-      <View>
-        <Text className="pt-14 pb-6 border-b-6 border-b-black text-center text-xl text-white bg-purple-500 font-semibold">
-          Your journey
-        </Text>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Your journey</Text>
       </View>
 
       <View style={styles.container}>
@@ -111,42 +145,40 @@ export default function RenderMap() {
         )}
       </View>
 
-      <View>
-        <View className="flex-row w-full gap-1 py-1 px-3">
-          <Pressable
-            className="flex-1 items-center bg-blue-500 p-4 rounded-lg"
-            onPress={() => {
-              if (isChoosingSource) {
-                setSource(null); // Remove source when canceling
-              }
-              setIsChoosingSource(!isChoosingSource);
-            }}
-          >
-            <Text className="text-white text-lg">
-              {isChoosingSource ? 'Cancel' : 'Choose Source'}
-            </Text>
-          </Pressable>
-          <Pressable
-            className="flex-1 items-center bg-blue-500 p-4 rounded-lg"
-            onPress={() => {
-              if (isChoosingDestination) {
-                setDestination(null); // Remove destination when canceling
-              }
-              setIsChoosingDestination(!isChoosingDestination);
-            }}
-          >
-            <Text className="text-white text-lg">
-              {isChoosingDestination ? 'Cancel' : 'Choose Destination'}
-            </Text>
-          </Pressable>
-        </View>
-        <View className="flex-row w-full gap-1 py-1 px-3">
-          <Pressable className="flex-1 items-center bg-slate-500 p-4 rounded-lg">
-            <Text className="text-white text-lg">
-              {distance ? `${distance} km` : 'Distance'}
-            </Text>
-          </Pressable>
-        </View>
+      <View style={styles.buttonContainer}>
+        <Pressable
+          style={[styles.button, isChoosingSource && styles.buttonActive]}
+          onPress={() => {
+            if (isChoosingSource) {
+              setSource(null);
+            }
+            setIsChoosingSource(!isChoosingSource);
+          }}
+        >
+          <Text style={styles.buttonText}>
+            {isChoosingSource ? 'Cancel' : 'Choose Source'}
+          </Text>
+        </Pressable>
+        <Pressable
+          style={[styles.button, isChoosingDestination && styles.buttonActive]}
+          onPress={() => {
+            if (isChoosingDestination) {
+              setDestination(null);
+            }
+            setIsChoosingDestination(!isChoosingDestination);
+          }}
+        >
+          <Text style={styles.buttonText}>
+            {isChoosingDestination ? 'Cancel' : 'Choose Destination'}
+          </Text>
+        </Pressable>
+      </View>
+      <View style={styles.buttonContainer}>
+        <Pressable style={styles.button}>
+          <Text style={styles.buttonText}>
+            {distance ? `${distance} km` : 'Distance'}
+          </Text>
+        </Pressable>
       </View>
     </>
   );
@@ -159,5 +191,37 @@ const styles = StyleSheet.create({
   map: {
     width: '100%',
     height: '100%',
+  },
+  header: {
+    paddingTop: 30,
+    paddingBottom: 20,
+    backgroundColor: '#6d28d9',
+    alignItems: 'center',
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#ffffff',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    gap: 10,
+    padding: 10,
+    justifyContent: 'space-between',
+  },
+  button: {
+    flex: 1,
+    padding: 15,
+    backgroundColor: '#3b82f6',
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  buttonActive: {
+    backgroundColor: '#9333ea',
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 16,
   },
 });

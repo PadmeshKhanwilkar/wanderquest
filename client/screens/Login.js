@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import '../global.css';
+import { StatusBar } from 'react-native';
 
 // force install if dependency conflicts between react and react-dom
 import { Formik } from 'formik';
 
 // icons
-import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
+// import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
+import Octicons from 'react-native-vector-icons/Octicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 
 import {
   StyledContainer,

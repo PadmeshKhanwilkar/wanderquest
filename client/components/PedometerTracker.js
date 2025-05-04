@@ -1,72 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
-import { Pedometer } from 'expo-sensors';
+import React, { useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+  PermissionsAndroid,
+} from 'react-native';
+import AccurateStepCounter from 'react-native-accurate-step-counter';
 import { Colors } from '../components/styles';
 
 const PedometerTracker = ({ distance, setDistance, selectedWorkout }) => {
-  const [isPedometerAvailable, setIsPedometerAvailable] = useState('checking');
-  const [pastStepCount, setPastStepCount] = useState(0);
   const [currentStepCount, setCurrentStepCount] = useState(0);
+  const [isTracking, setIsTracking] = useState(false);
 
   useEffect(() => {
-    let subscription;
+    const config = {
+      default_threshold: 15.0,
+      default_delay: 150000000,
+      cheatInterval: 3000,
+      onStepCountChange: (stepCount) => {
+        setCurrentStepCount(stepCount);
+      },
+      onCheat: () => {
+        console.log('Cheating detected!');
+      },
+    };
 
-    const requestPermissionAndSubscribe = async () => {
-      if (Platform.OS === 'ios') {
-        const { status } = await Pedometer.requestPermissionsAsync();
-        if (status !== 'granted') {
-          setIsPedometerAvailable('Permission denied');
-          return;
+    const requestPermissionAndStart = async () => {
+      if (Platform.OS === 'android') {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACTIVITY_RECOGNITION
+        );
+
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          AccurateStepCounter.start(config);
+          setIsTracking(true);
+        } else {
+          console.warn('Permission denied for activity recognition');
         }
-      } else if (Platform.OS === 'android') {
-        const { status } = await Pedometer.requestPermissionsAsync();
-        if (status !== 'granted') {
-          setIsPedometerAvailable('Permission denied');
-          return;
-        }
-      }
-
-      const isAvailable = await Pedometer.isAvailableAsync();
-      setIsPedometerAvailable(String(isAvailable));
-
-      if (isAvailable) {
-        if (Platform.OS === 'ios') {
-          const end = new Date();
-          const start = new Date();
-          start.setDate(end.getDate() - 1);
-
-          try {
-            const result = await Pedometer.getStepCountAsync(start, end);
-            setPastStepCount(result.steps);
-          } catch (err) {
-            console.error('Error fetching past step count:', err);
-            setPastStepCount(0);
-          }
-        }
-
-        // Watch step count for both platforms
-        subscription = Pedometer.watchStepCount((result) => {
-          setCurrentStepCount(result.steps);
-        });
       }
     };
 
-    requestPermissionAndSubscribe();
+    requestPermissionAndStart();
 
     return () => {
-      if (subscription) subscription.remove();
+      if (isTracking) {
+        AccurateStepCounter.stop();
+      }
     };
   }, []);
 
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Live Step Tracking</Text>
-      <Text style={styles.label}>
-        Pedometer available: {isPedometerAvailable}
-      </Text>
-      {Platform.OS === 'ios' && (
-        <Text style={styles.label}>Past 24 hrs: {pastStepCount} steps</Text>
-      )}
       <Text style={styles.label}>
         Current session: {currentStepCount} steps
       </Text>

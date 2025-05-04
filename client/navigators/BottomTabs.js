@@ -5,7 +5,7 @@ import RenderMap from './../screens/RenderMap';
 import { View, Text } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { Ionicons } from 'react-native-vector-icons'; // For icons
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // Import screens
 import HomeScreen from '../screens/HomeScreen';

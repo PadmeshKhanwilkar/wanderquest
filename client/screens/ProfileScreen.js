@@ -22,7 +22,7 @@ const ProfileScreen = ({ navigation, route }) => {
     <View style={styles.container}>
       <Avatar
         resizeMode="cover"
-        source={require('./../assets/img/—Pngtree—cartoon color simple male avatar_5230557.png')}
+        source={require('./../assets/img/cartoonAvatar.png')}
       />
 
       {/* Username & Level */}

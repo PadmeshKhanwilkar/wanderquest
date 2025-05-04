@@ -36,7 +36,7 @@ const LeaderboardScreen = () => {
             >
               <Image
                 style={styles.mainCardImage}
-                source={require('../assets/img/—Pngtree—cartoon color simple male avatar_5230557.png')}
+                source={require('../assets/img/cartoonAvatar.png')}
                 resizeMode="cover"
               />
               <Text style={styles.mainCardTitle}>{user.name}</Text>
@@ -58,7 +58,7 @@ const LeaderboardScreen = () => {
               <Text style={styles.cardIndex}>{index + 4}</Text>
               <Image
                 style={styles.cardImage}
-                source={require('../assets/img/—Pngtree—cartoon color simple male avatar_5230557.png')}
+                source={require('../assets/img/cartoonAvatar.png')}
                 resizeMode="cover"
               />
               <Text style={styles.cardTitle}>{item.name}</Text>

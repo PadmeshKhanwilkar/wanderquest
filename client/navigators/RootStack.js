@@ -34,9 +34,10 @@ const RootStack = () => {
         initialRouteName="Login"
       >
         <Stack.Screen name="Login" component={Login} />
+
         <Stack.Screen name="Signup" component={Signup} />
         {/* <Stack.Screen name="RenderMap" component={RenderMap} /> */}
-        
+
         <Stack.Screen
           options={{ headerTintColor: primary }}
           name="Welcome"

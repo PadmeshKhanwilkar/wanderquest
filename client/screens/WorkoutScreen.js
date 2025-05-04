@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
-import { View, Modal, Text, TextInput, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import {
+  View,
+  Modal,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Colors, StyledButton, ButtonText } from '../components/styles';
 import PedometerTracker from '../components/PedometerTracker';
 
@@ -9,40 +16,16 @@ const WorkoutScreen = () => {
   const [selectedWorkout, setSelectedWorkout] = useState('');
   const [distance, setDistance] = useState('');
 
-  // Function to open the modal with a selected workout type
   const openModal = (workoutType) => {
     setSelectedWorkout(workoutType);
     setModalVisible(true);
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'flex-start',
-        paddingTop: '25%',
-        alignItems: 'center',
-        backgroundColor: Colors.primary,
-      }}
-    >
-      <Text
-        style={{
-          fontSize: 24,
-          fontWeight: 'bold',
-          color: Colors.brand,
-          marginBottom: 20,
-        }}
-      >
-        Workout Tracker
-      </Text>
-      {/* Workout Buttons */}
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          width: '90%',
-        }}
-      >
+    <View style={styles.container}>
+      <Text style={styles.title}>Workout Tracker</Text>
+
+      <View style={styles.buttonRow}>
         <WorkoutButton
           icon="walk"
           label="Walking"
@@ -60,7 +43,6 @@ const WorkoutScreen = () => {
         />
       </View>
 
-      {/* ✅ Auto Step Tracking for Walking & Running */}
       {(selectedWorkout === 'Walking' || selectedWorkout === 'Running') && (
         <PedometerTracker
           distance={distance}
@@ -69,26 +51,22 @@ const WorkoutScreen = () => {
         />
       )}
 
-      {/* Modal for Distance Input */}
-      <Modal visible={modalVisible} transparent={true} animationType="slide">
-        <View style={modalStyles.modalContainer}>
-          <View style={modalStyles.modalContent}>
-            <Text style={modalStyles.modalTitle}>
+      <Modal visible={modalVisible} transparent animationType="slide">
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>
               Enter Distance for {selectedWorkout}
             </Text>
 
             <TextInput
-              style={modalStyles.input}
+              style={styles.input}
               placeholder="Enter distance in km"
               keyboardType="numeric"
               value={distance}
-              onChangeText={(text) => setDistance(text)}
+              onChangeText={setDistance}
             />
 
-            <View
-              style={{ flexDirection: 'row', justifyContent: 'space-around' }}
-              className="gap-3"
-            >
+            <View style={styles.modalButtonRow}>
               <StyledButton onPress={() => setModalVisible(false)}>
                 <ButtonText>Cancel</ButtonText>
               </StyledButton>
@@ -108,7 +86,7 @@ const WorkoutScreen = () => {
   );
 };
 
-// ✅ **Reusable Workout Button Component**
+// Workout Button Component
 const WorkoutButton = ({ icon, label, onPress }) => (
   <TouchableOpacity onPress={onPress} style={buttonStyles.button}>
     <Ionicons name={icon} size={30} color={Colors.primary} />
@@ -116,23 +94,26 @@ const WorkoutButton = ({ icon, label, onPress }) => (
   </TouchableOpacity>
 );
 
-// ✅ **Workout Button Styles**
-const buttonStyles = {
-  button: {
-    backgroundColor: Colors.brand,
-    padding: 20,
-    borderRadius: 10,
+// Main Container Styles
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    paddingTop: '25%',
     alignItems: 'center',
+    backgroundColor: Colors.primary,
   },
-  text: {
-    color: Colors.primary,
-    marginTop: 5,
+  title: {
+    fontSize: 24,
     fontWeight: 'bold',
+    color: Colors.brand,
+    marginBottom: 20,
   },
-};
-
-// ✅ **Modal Styles**
-const modalStyles = {
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '90%',
+  },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -150,6 +131,7 @@ const modalStyles = {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 15,
+    color: Colors.brand,
   },
   input: {
     width: '100%',
@@ -158,7 +140,30 @@ const modalStyles = {
     borderColor: Colors.darkLight,
     borderRadius: 5,
     marginBottom: 15,
+    color: Colors.tertiary,
   },
-};
+  modalButtonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    gap: 10,
+  },
+});
+
+// Workout Button Styles
+const buttonStyles = StyleSheet.create({
+  button: {
+    backgroundColor: Colors.brand,
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginHorizontal: 5,
+  },
+  text: {
+    color: Colors.primary,
+    marginTop: 5,
+    fontWeight: 'bold',
+  },
+});
 
 export default WorkoutScreen;
