@@ -1,1 +1,6 @@
 node_modules
+# Ignore build outputs
+android/app/build/
+ios/build/
+*.apk
+*.keystore
