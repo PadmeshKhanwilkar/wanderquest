@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="24"
-        android:targetSdkVersion="35" />
+        android:targetSdkVersion="36" />
     <!-- Required for step tracking on Android 10+ -->
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" /> <!-- Optional: Internet permission, already present -->
     <uses-permission android:name="android.permission.INTERNET" />

@@ -3,7 +3,8 @@ import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
 import axios from 'axios';
 
 const LeaderboardScreen = () => {
-  const url = 'http://192.168.1.4:3000/user/leaderboard'; // padmesh wifi
+  // const url = 'http://192.168.1.4:3000/user/leaderboard'; // padmesh wifi
+  const url = 'http://192.168.1.6:3000/user/leaderboard'; // 
   const [leaderboard, setLeaderboard] = useState([]);
 
   useEffect(() => {
