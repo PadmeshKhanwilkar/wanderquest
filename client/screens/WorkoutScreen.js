@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View,
   Modal,
@@ -6,15 +6,20 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  ScrollView,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Colors, StyledButton, ButtonText } from '../components/styles';
 import PedometerTracker from '../components/PedometerTracker';
+import { FitnessItems } from '../Context';
+import FitnessCards from '../components/FitnessCards';
 
 const WorkoutScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedWorkout, setSelectedWorkout] = useState('');
   const [distance, setDistance] = useState('');
+  const [showIcon, setShowIcon] = useState(false);
+  const { calories, minutes, workout } = useContext(FitnessItems);
 
   const openModal = (workoutType) => {
     setSelectedWorkout(workoutType);
@@ -23,9 +28,9 @@ const WorkoutScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Workout Tracker</Text>
+      {/* <Text style={styles.title}>Workout Tracker</Text> */}
 
-      <View style={styles.buttonRow}>
+      {/* <View style={styles.buttonRow}>
         <WorkoutButton
           icon="walk"
           label="Walking"
@@ -41,7 +46,83 @@ const WorkoutScreen = () => {
           label="Running"
           onPress={() => openModal('Running')}
         />
-      </View>
+      </View> */}
+
+      <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 1 }}>
+        <View
+          style={{
+            backgroundColor: '#000000d7',
+            paddingTop: 40,
+            paddingHorizontal: 20,
+            height: 160,
+            width: '100%',
+          }}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: 50,
+            }}
+          >
+            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }}>
+              SIX PACK IN 30 DAYS
+            </Text>
+
+            {/* Dark Mode  */}
+            <TouchableOpacity onPress={() => setShowIcon(!showIcon)}>
+              {showIcon ? (
+                <Ionicons name="sunny" size={24} color="white" />
+              ) : (
+                <Ionicons name="moon" size={24} color="white" />
+              )}
+            </TouchableOpacity>
+          </View>
+
+          {/* Cards Row  */}
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: 30,
+            }}
+          >
+            {/* First Card  */}
+            <View style={styles.shadowCards}>
+              <Text
+                style={{ fontWeight: 'bold', fontSize: 18, color: 'black' }}
+              >
+                {calories.toFixed(2)}
+              </Text>
+              <Text style={{ color: 'black' }}>KCAL</Text>
+            </View>
+
+            {/* Second Card  */}
+            <View style={styles.shadowCards}>
+              <Text
+                style={{ fontWeight: 'bold', fontSize: 18, color: 'black' }}
+              >
+                {workout}
+              </Text>
+              <Text style={{ color: 'black' }}>WORKOUTS</Text>
+            </View>
+
+            {/* Third Card  */}
+            <View style={styles.shadowCards}>
+              <Text
+                style={{ fontWeight: 'bold', fontSize: 18, color: 'black' }}
+              >
+                {minutes}
+              </Text>
+              <Text style={{ color: 'black' }}>MINUTES</Text>
+            </View>
+          </View>
+        </View>
+        {/* Fitness Cards  */}
+        <FitnessCards />
+      </ScrollView>
 
       {(selectedWorkout === 'Walking' || selectedWorkout === 'Running') && (
         <PedometerTracker
@@ -99,7 +180,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
-    paddingTop: '25%',
+    paddingTop: '15%',
     alignItems: 'center',
     backgroundColor: Colors.primary,
   },
@@ -147,6 +228,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '100%',
     gap: 10,
+  },
+  shadowCards: {
+    backgroundColor: '#ffffff',
+    width: '32%',
+    height: 80,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 });
 

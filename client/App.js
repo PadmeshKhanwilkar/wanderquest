@@ -4,11 +4,14 @@
 // React navigation stack
 import RootStack from './navigators/RootStack';
 import { UserProvider } from './UserContext';
+import { FitnessContext } from './Context';
 
 export default function App() {
   return (
     <UserProvider>
-      <RootStack />
+      <FitnessContext>
+        <RootStack />
+      </FitnessContext>
     </UserProvider>
   );
 }

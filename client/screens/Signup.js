@@ -183,7 +183,7 @@ const Signup = ({ navigation }) => {
             )}
 
             <View style={styles.extraView}>
-              <Text>Already have an account? </Text>
+              <Text style={styles.l1}>Already have an account? </Text>
               <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                 <Text style={styles.linkText}>Login</Text>
               </TouchableOpacity>
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
     marginBottom: 10,
-    color: '#222',
+    color: '#6d28d9',
   },
   subtitle: {
     fontSize: 18,
@@ -309,6 +309,10 @@ const styles = StyleSheet.create({
   linkText: {
     color: '#007BFF',
     fontWeight: 'bold',
+  },
+
+  l1: {
+    color: 'black',
   },
 });
 

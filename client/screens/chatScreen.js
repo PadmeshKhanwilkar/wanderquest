@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, FlatList, Text, StyleSheet, Alert } from 'react-native';
+import {
+  View,
+  TextInput,
+  Button,
+  FlatList,
+  Text,
+  StyleSheet,
+  Alert,
+} from 'react-native';
 import axios from 'axios';
 
 const ChatScreen = () => {
+  const OPENAI_API_KEY =
+    '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';
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
     { id: '1', sender: 'bot', text: 'Hi! Ask me anything.' },
@@ -17,7 +27,7 @@ const ChatScreen = () => {
       sender: 'user',
       text: input,
     };
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setLoading(true);
 
@@ -28,7 +38,7 @@ const ChatScreen = () => {
           model: 'gpt-3.5-turbo',
           messages: [
             { role: 'system', content: 'You are a helpful assistant.' },
-            { role: 'user', content: input }
+            { role: 'user', content: input },
           ],
         },
         {
@@ -47,13 +57,19 @@ const ChatScreen = () => {
         text: replyText,
       };
 
-      setMessages(prev => [...prev, botMessage]);
+      setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error(error);
       if (error.response?.status === 429) {
-        Alert.alert('Rate Limit Reached', 'You are sending too many requests. Try again later.');
+        Alert.alert(
+          'Rate Limit Reached',
+          'You are sending too many requests. Try again later.'
+        );
       } else {
-        Alert.alert('Error', 'Something went wrong. Check your API key or network.');
+        Alert.alert(
+          'Error',
+          'Something went wrong. Check your API key or network.'
+        );
       }
     } finally {
       setLoading(false);
@@ -64,7 +80,7 @@ const ChatScreen = () => {
     <View style={styles.container}>
       <FlatList
         data={messages}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Text style={item.sender === 'user' ? styles.user : styles.bot}>
             {item.text}
@@ -78,17 +94,22 @@ const ChatScreen = () => {
           onChangeText={setInput}
           placeholder="Type a message"
         />
-        <Button title={loading ? '...' : 'Send'} onPress={sendMessage} disabled={loading} />
+        <Button
+          title={loading ? '...' : 'Send'}
+          onPress={sendMessage}
+          disabled={loading}
+        />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 10 },
+  container: { flex: 1, paddingLeft: 10, paddingRight: 10, paddingTop: 40 },
   user: {
     alignSelf: 'flex-end',
     backgroundColor: '#d0f0c0',
+    color: 'black',
     margin: 5,
     padding: 10,
     borderRadius: 5,
@@ -96,6 +117,7 @@ const styles = StyleSheet.create({
   bot: {
     alignSelf: 'flex-start',
     backgroundColor: '#f0f0f0',
+    color: 'black',
     margin: 5,
     padding: 10,
     borderRadius: 5,
@@ -107,6 +129,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginRight: 10,
     borderRadius: 5,
+    color: 'black',
   },
 });
 

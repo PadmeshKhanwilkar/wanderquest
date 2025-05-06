@@ -13,6 +13,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import WorkoutScreen from '../screens/WorkoutScreen';
 import LeaderboardScreen from '../screens/LeaderboardScreen';
+import ChatScreen from '../screens/chatScreen';
 const Tab = createBottomTabNavigator();
 
 const BottomTabs = () => {
@@ -26,6 +27,8 @@ const BottomTabs = () => {
           else if (route.name === 'Settings') iconName = 'settings-outline';
           else if (route.name === 'Workout') iconName = 'fitness-outline';
           else if (route.name === 'Leaderboard') iconName = 'trophy-outline';
+          else if (route.name === 'ChatScreen')
+            iconName = 'chatbubble-ellipses-outline';
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: '#007AFF',
@@ -37,6 +40,7 @@ const BottomTabs = () => {
       <Tab.Screen name="Profile" component={ProfileScreen} />
       <Tab.Screen name="Workout" component={WorkoutScreen} />
       <Tab.Screen name="Leaderboard" component={LeaderboardScreen} />
+      <Tab.Screen name="ChatScreen" component={ChatScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );

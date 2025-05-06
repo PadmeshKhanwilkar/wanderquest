@@ -14,6 +14,9 @@ import Welcome from './../screens/Welcome';
 import BottomTabs from './BottomTabs';
 import WorkoutScreen from './../screens/WorkoutScreen';
 import LeaderboardScreen from '../screens/LeaderboardScreen';
+import WorkoutRoutine from '../screens/WorkoutRoutine';
+import FitScreen from '../screens/FitScreen';
+import RestScreen from '../screens/RestScreen';
 // import RenderMap from './../screens/RenderMap';
 
 const Stack = createStackNavigator();
@@ -46,6 +49,9 @@ const RootStack = () => {
         <Stack.Screen name="BottomTabs" component={BottomTabs} />
         <Stack.Screen name="Workout" component={WorkoutScreen} />
         <Stack.Screen name="Leaderboard" component={LeaderboardScreen} />
+        <Stack.Screen name="WorkoutRoutine" component={WorkoutRoutine} />
+        <Stack.Screen name="Fit" component={FitScreen} />
+        <Stack.Screen name="Rest" component={RestScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

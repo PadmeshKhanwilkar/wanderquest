@@ -54,7 +54,8 @@ export const Avatar = styled.Image`
 `;
 
 export const WelcomeImage = styled.Image`
-  height: 50%;
+  height: 44%;
+  margin-bottom: 20px;
 `;
 
 export const PageLogo = styled.Image`
