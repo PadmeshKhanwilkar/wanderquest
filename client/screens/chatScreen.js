@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, FlatList, Text, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
 
-const OPENAI_API_KEY = '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';
-
 const ChatScreen = () => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
