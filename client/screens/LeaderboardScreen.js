@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
 import axios from 'axios';
+import { Colors } from '../components/styles'; // adjust path if needed
+
+const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
 
 const LeaderboardScreen = () => {
-  const url = 'http://192.168.1.4:3000/user/leaderboard'; // padmesh wifi
+  const url = 'http://192.168.1.6:3000/user/leaderboard';
   const [leaderboard, setLeaderboard] = useState([]);
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
         const response = await axios.get(url);
-
-        console.log(response.data);
         setLeaderboard(response.data.data);
       } catch (error) {
         console.error('Error fetching leaderboard:', error);
@@ -77,10 +78,10 @@ const LeaderboardScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1f2937',
+    backgroundColor: primary,
   },
   topContainer: {
-    backgroundColor: '#6d28d9',
+    backgroundColor: brand,
     paddingTop: 30,
     padding: 20,
     borderBottomRightRadius: 40,
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     textAlign: 'center',
-    color: 'white',
+    color: primary,
     fontSize: 21,
     fontWeight: 'bold',
   },
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   mainCard: {
-    backgroundColor: 'purple',
+    backgroundColor: secondary,
     padding: 20,
     alignItems: 'center',
     borderRadius: 20,
@@ -113,12 +114,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   mainCardTitle: {
-    color: 'white',
+    color: tertiary,
     fontSize: 17,
     fontWeight: '600',
   },
   mainCardRankContainer: {
-    backgroundColor: 'orange',
+    backgroundColor: green,
     width: 30,
     height: 30,
     borderRadius: 30,
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
     bottom: -15,
   },
   mainCardRankContainerText: {
-    color: 'white',
+    color: primary,
     fontWeight: 'bold',
   },
   card: {
@@ -136,6 +137,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderBottomColor: secondary,
+    backgroundColor: primary,
   },
   cardDataContainer: {
     flexDirection: 'row',
@@ -143,7 +147,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   cardIndex: {
-    color: 'white',
+    color: tertiary,
   },
   cardImage: {
     width: 40,
@@ -152,12 +156,13 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   cardTitle: {
-    color: 'white',
+    color: tertiary,
     fontSize: 17,
   },
   cardRankContainer: {},
   cardRankTitle: {
-    color: 'yellow',
+    color: brand,
+    fontWeight: 'bold',
   },
 });
 

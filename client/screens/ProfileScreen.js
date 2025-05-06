@@ -1,21 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Colors } from './../components/styles';
+import { Avatar } from './../components/styles';
+import { UserContext } from '../UserContext';
 
-import {
-  InnerContainer,
-  PageTitle,
-  SubTitle,
-  StyledFormArea,
-  StyledButton,
-  ButtonText,
-  Line,
-  WelcomeContainer,
-  WelcomeImage,
-  Avatar,
-} from './../components/styles.js';
-import { UserContext } from '../UserContext.js';
+const { primary, secondary, tertiary, brand, green, red, darkLight } = Colors;
 
-const ProfileScreen = ({ navigation, route }) => {
+const ProfileScreen = ({ navigation }) => {
   const { user } = useContext(UserContext);
 
   return (
@@ -25,12 +16,10 @@ const ProfileScreen = ({ navigation, route }) => {
         source={require('./../assets/img/cartoonAvatar.png')}
       />
 
-      {/* Username & Level */}
       <Text style={styles.username}>{user.name}</Text>
-      <Text className="text-white mb-1">{user.email}</Text>
+      <Text style={styles.email}>{user.email}</Text>
       <Text style={styles.level}>Level 5 | 2,340 XP</Text>
 
-      {/* Stats */}
       <View style={styles.statsContainer}>
         <View style={styles.statBox}>
           <Text style={styles.statValue}>15,200</Text>
@@ -42,7 +31,6 @@ const ProfileScreen = ({ navigation, route }) => {
         </View>
       </View>
 
-      {/* Achievements Section */}
       <Text style={styles.sectionTitle}>🏆 Achievements</Text>
       <View style={styles.achievementContainer}>
         <Image
@@ -59,7 +47,6 @@ const ProfileScreen = ({ navigation, route }) => {
         />
       </View>
 
-      {/* Profile Actions */}
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('EditProfile')}
@@ -69,9 +56,7 @@ const ProfileScreen = ({ navigation, route }) => {
 
       <TouchableOpacity
         style={[styles.button, styles.logoutButton]}
-        onPress={() => {
-          navigation.navigate('Login');
-        }}
+        onPress={() => navigation.navigate('Login')}
       >
         <Text style={styles.buttonText}>Logout</Text>
       </TouchableOpacity>
@@ -83,25 +68,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#121212', // Dark theme
+    backgroundColor: primary,
     paddingTop: 60,
-  },
-  avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    borderWidth: 2,
-    borderColor: '#FFD700', // Gold color for premium touch
   },
   username: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#fff',
+    color: tertiary,
     marginTop: 10,
+  },
+  email: {
+    fontSize: 16,
+    color: darkLight,
+    marginTop: 2,
   },
   level: {
     fontSize: 16,
-    color: '#aaa',
+    color: brand,
   },
   statsContainer: {
     flexDirection: 'row',
@@ -111,7 +94,7 @@ const styles = StyleSheet.create({
   },
   statBox: {
     alignItems: 'center',
-    backgroundColor: '#1E1E1E',
+    backgroundColor: secondary,
     padding: 15,
     borderRadius: 10,
     width: 120,
@@ -119,16 +102,16 @@ const styles = StyleSheet.create({
   statValue: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#FFD700',
+    color: green,
   },
   statLabel: {
     fontSize: 14,
-    color: '#ccc',
+    color: darkLight,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#FFD700',
+    color: brand,
     marginBottom: 10,
   },
   achievementContainer: {
@@ -143,7 +126,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '80%',
-    backgroundColor: '#FFD700',
+    backgroundColor: brand,
     padding: 12,
     borderRadius: 8,
     alignItems: 'center',
@@ -152,9 +135,10 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: primary,
   },
   logoutButton: {
-    backgroundColor: '#FF4500',
+    backgroundColor: red,
   },
 });
 

@@ -238,6 +238,55 @@
         }
       }
     },
+    "react-native-sensors": {
+      "root": "D:\\Projects\\wanderquest\\client\\node_modules\\react-native-sensors",
+      "name": "react-native-sensors",
+      "platforms": {
+        "ios": {
+          "podspecPath": "D:\\Projects\\wanderquest\\client\\node_modules\\react-native-sensors\\RNSensors.podspec",
+          "version": "7.3.6",
+          "configurations": [],
+          "scriptPhases": []
+        },
+        "android": {
+          "sourceDir": "D:\\Projects\\wanderquest\\client\\node_modules\\react-native-sensors\\android",
+          "packageImportPath": "import com.sensors.RNSensorsPackage;",
+          "packageInstance": "new RNSensorsPackage()",
+          "buildTypes": [],
+          "componentDescriptors": [],
+          "cmakeListsPath": "D:/Projects/wanderquest/client/node_modules/react-native-sensors/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cxxModuleCMakeListsModuleName": null,
+          "cxxModuleCMakeListsPath": null,
+          "cxxModuleHeaderName": null,
+          "isPureCxxDependency": false
+        }
+      }
+    },
+    "react-native-shake": {
+      "root": "D:\\Projects\\wanderquest\\client\\node_modules\\react-native-shake",
+      "name": "react-native-shake",
+      "platforms": {
+        "ios": {
+          "podspecPath": "D:\\Projects\\wanderquest\\client\\node_modules\\react-native-shake\\react-native-shake.podspec",
+          "version": "6.0.0-beta.3",
+          "configurations": [],
+          "scriptPhases": []
+        },
+        "android": {
+          "sourceDir": "D:\\Projects\\wanderquest\\client\\node_modules\\react-native-shake\\android",
+          "packageImportPath": "import com.shake.ShakePackage;",
+          "packageInstance": "new ShakePackage()",
+          "buildTypes": [],
+          "libraryName": "RNShakeSpec",
+          "componentDescriptors": [],
+          "cmakeListsPath": "D:/Projects/wanderquest/client/node_modules/react-native-shake/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cxxModuleCMakeListsModuleName": null,
+          "cxxModuleCMakeListsPath": null,
+          "cxxModuleHeaderName": null,
+          "isPureCxxDependency": false
+        }
+      }
+    },
     "react-native-vector-icons": {
       "root": "D:\\Projects\\wanderquest\\client\\node_modules\\react-native-vector-icons",
       "name": "react-native-vector-icons",

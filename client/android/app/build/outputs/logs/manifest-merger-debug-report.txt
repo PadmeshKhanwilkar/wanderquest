@@ -9,11 +9,13 @@ MERGED from [:react-native-gesture-handler] D:\Projects\wanderquest\client\node_
 MERGED from [:react-native-permissions] D:\Projects\wanderquest\client\node_modules\react-native-permissions\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-safe-area-context] D:\Projects\wanderquest\client\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-screens] D:\Projects\wanderquest\client\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
+MERGED from [:react-native-shake] D:\Projects\wanderquest\client\node_modules\react-native-shake\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-community_datetimepicker] D:\Projects\wanderquest\client\node_modules\@react-native-community\datetimepicker\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-accurate-step-counter] D:\Projects\wanderquest\client\node_modules\react-native-accurate-step-counter\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-geolocation-service] D:\Projects\wanderquest\client\node_modules\react-native-geolocation-service\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-maps] D:\Projects\wanderquest\client\node_modules\react-native-maps\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-reanimated] D:\Projects\wanderquest\client\node_modules\react-native-reanimated\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
+MERGED from [:react-native-sensors] D:\Projects\wanderquest\client\node_modules\react-native-sensors\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-vector-icons] D:\Projects\wanderquest\client\node_modules\react-native-vector-icons\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [com.facebook.react:react-android:0.76.3] C:\Users\samue\.gradle\caches\8.13\transforms\229188e91c5f6e4cce1dfaac2b677ae0\transformed\jetified-react-android-0.76.3-debug\AndroidManifest.xml:2:1-24:12
 MERGED from [com.google.android.material:material:1.6.1] C:\Users\samue\.gradle\caches\8.13\transforms\f5f232dfdfca1467d7b54bc874967cea\transformed\material-1.6.1\AndroidManifest.xml:17:1-26:12
@@ -250,6 +252,8 @@ MERGED from [:react-native-safe-area-context] D:\Projects\wanderquest\client\nod
 MERGED from [:react-native-safe-area-context] D:\Projects\wanderquest\client\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-screens] D:\Projects\wanderquest\client\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-screens] D:\Projects\wanderquest\client\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-shake] D:\Projects\wanderquest\client\node_modules\react-native-shake\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-shake] D:\Projects\wanderquest\client\node_modules\react-native-shake\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-community_datetimepicker] D:\Projects\wanderquest\client\node_modules\@react-native-community\datetimepicker\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-community_datetimepicker] D:\Projects\wanderquest\client\node_modules\@react-native-community\datetimepicker\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-accurate-step-counter] D:\Projects\wanderquest\client\node_modules\react-native-accurate-step-counter\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
@@ -260,6 +264,8 @@ MERGED from [:react-native-maps] D:\Projects\wanderquest\client\node_modules\rea
 MERGED from [:react-native-maps] D:\Projects\wanderquest\client\node_modules\react-native-maps\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-reanimated] D:\Projects\wanderquest\client\node_modules\react-native-reanimated\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-reanimated] D:\Projects\wanderquest\client\node_modules\react-native-reanimated\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-sensors] D:\Projects\wanderquest\client\node_modules\react-native-sensors\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-sensors] D:\Projects\wanderquest\client\node_modules\react-native-sensors\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-vector-icons] D:\Projects\wanderquest\client\node_modules\react-native-vector-icons\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-vector-icons] D:\Projects\wanderquest\client\node_modules\react-native-vector-icons\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [com.facebook.react:react-android:0.76.3] C:\Users\samue\.gradle\caches\8.13\transforms\229188e91c5f6e4cce1dfaac2b677ae0\transformed\jetified-react-android-0.76.3-debug\AndroidManifest.xml:10:5-44
