@@ -58,12 +58,6 @@ const Login = ({ navigation }) => {
     // const url = 'http://192.168.1.26:3000/user/login'; 
     const url = 'http://192.168.1.6:3000/user/login'; //samar pc
     // const url = 'http://192.168.226.195:3000/user/login'; // padmesh idea moobile ip
-<<<<<<< HEAD
-    // const url = 'http://192.168.1.4:3000/user/login';
-=======
-    const url = 'http://192.168.1.6:3000/user/login'; // padmesh wifi
->>>>>>> 7b013c0e33e09735e430b11f278dea59e087b0be
-
     axios
       .post(url, credentials)
       .then((response) => {

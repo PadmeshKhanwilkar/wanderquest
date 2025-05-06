@@ -6,12 +6,10 @@ import { Colors } from '../components/styles'; // adjust path if needed
 const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
 
 const LeaderboardScreen = () => {
-<<<<<<< HEAD
+
   // const url = 'http://192.168.1.4:3000/user/leaderboard'; // padmesh wifi
   const url = 'http://192.168.1.6:3000/user/leaderboard'; // 
-=======
-  const url = 'http://192.168.1.6:3000/user/leaderboard';
->>>>>>> 7b013c0e33e09735e430b11f278dea59e087b0be
+
   const [leaderboard, setLeaderboard] = useState([]);
 
   useEffect(() => {
