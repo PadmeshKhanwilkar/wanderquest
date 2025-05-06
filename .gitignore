@@ -1,6 +1,19 @@
-node_modules
-# Ignore build outputs
-android/app/build/
-ios/build/
+# Android binaries
 *.apk
 *.keystore
+
+# Node modules
+client/node_modules/
+
+# Android build artifacts
+client/android/.gradle/
+client/android/.idea/
+client/android/local.properties
+client/android/build/
+client/android/app/build/
+
+# Logs
+client/*.log
+client/yarn-error.log
+client/npm-debug.log*
+
